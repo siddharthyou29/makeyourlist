@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <button class="home">Home</button>
+        <button class ='About'>About</button>
+    </div>
+    <div class="below">
+        <h2>Enter your Tasks</h2>
+        <form action="/submit" method="post" class="input">
+            <input type="text" name="task" placeholder="Enter your Task" autofocus>
+            <button type="submit" id="sub">Submit</button>
+        </form>
+        <% data.forEach((item)=>{ %>
+            <div class="item">
+                <div class="left">
+                <li class = 'fill' id = 'lis<%= item.id %>'><%= item.title %></li>
+                </div>
+                <div class="right">
+                <form action="/deli" method="post">
+                    <input type="hidden" name="delId", value='<%= item.id %>'>
+                    <input  id="list<%= item.id %>" type="checkbox"  name='waste' value="0" onclick="handler('<%= item.id %>' )">
+                    <button class="upd del" type="submit">Mark</button>
+                    <button class='del' type="submit">Delete</button>
+                </form>
+                </div>
+                
+            </div>
+            
+        <% } );%>
+    </div>
+    <script>
+        function handler(id){
+            const el = document.getElementById('lis'+id);
+            if(el){
+                el.classList.toggle('strike');
+            }
+            
+        }
+    </script>
+</body>
+</html>
